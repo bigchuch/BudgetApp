@@ -1,7 +1,7 @@
-database = {}
+
 class budget:
 
-    
+    database = {}
 
     def __init__(self, name):
         self.name = name
@@ -17,12 +17,12 @@ class budget:
 
         print("%d deposited of for %s\n" %(self.balance, self.name))
 
-        database[self.name]= deposit_amount
+        self.database[self.name]= deposit_amount
         #print(database)
 
     def withdraw(self):
         amount = int(input("how much do you wanna withdraw from %s: " % self.name))
-        if database[self.name] >= amount:
+        if self.database[self.name] >= amount:
             
             if amount not in range(0,999):
 
@@ -30,9 +30,9 @@ class budget:
 
                 self.expenditure += amount
 
-                database[self.name]= self.balance
+                self.database[self.name]= self.balance
     
-                print(database)
+                print(self.database)
                 
                 print("after %d witdrawal from %s budget, %d balance is left\n" %(self.expenditure,self.name,self.balance))
                    
@@ -45,27 +45,27 @@ class budget:
 
     def category_balance(self):
         
-        print ("balance for %s is %s \n" %(self.name, database[self.name]))
+        print ("balance for %s is %s \n" %(self.name, self.database[self.name]))
          
 
     def balance_transfer(self,category_to_transfer):
 
         self.category_to_transfer = category_to_transfer 
 
-        if category_to_transfer in database: 
+        if category_to_transfer in self.database: 
 
             amount_to_transfer = int(input("enter amount to transfer: "))
             
-            if amount_to_transfer <= database[self.name]:
+            if amount_to_transfer <= self.database[self.name]:
 
-                updated_old_balance = database[self.name] - amount_to_transfer
+                updated_old_balance = self.database[self.name] - amount_to_transfer
 
-                database[self.name] = updated_old_balance
+                self.database[self.name] = updated_old_balance
        
-                database [self.category_to_transfer]+= amount_to_transfer
+                self.database [self.category_to_transfer]+= amount_to_transfer
                 print("successfully transfered %d from %s budget to %s budget\n" %(amount_to_transfer,self.name, self.category_to_transfer))
                 
-                print(database)
+                print(self.database)
 
             else:
                 print("amount to be withdraw is greater than your balance\n")
@@ -74,17 +74,17 @@ class budget:
         else:
             amount_to_transfer = int(input("enter amount to transfer: "))
         
-            if amount_to_transfer <= database[self.name] :
+            if amount_to_transfer <= self.database[self.name] :
 
-                updated_old_balance = database[self.name] - amount_to_transfer
+                updated_old_balance = self.database[self.name] - amount_to_transfer
 
-                database[self.name] = updated_old_balance
+                self.database[self.name] = updated_old_balance
                      
-                database [self.category_to_transfer]= amount_to_transfer
+                self.database [self.category_to_transfer]= amount_to_transfer
 
                 print("successfully transfered %d from %s budget to %s budget\n" %(amount_to_transfer,self.name, self.category_to_transfer))
                 
-                print(database)
+                print(self.database)
 
                
 
